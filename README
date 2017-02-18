@@ -1,0 +1,34 @@
+Newname Or Rename Database (NORD) has some things that you should know beforehand:
+
+- the directory structure of a database MUST be conforming this format: /u<0-9>+/oradata/<SID_NAME>
+- before running the script you can edit it via any editor (i.e. vi) and define the MOUNT variable to 
+  map mount point to different ones (optional).
+- if TARGET_SID parameter is not specified the script assumes that the TARGET_SID is the same as SOURCE_SID.
+
+Everything else is covered in help:
+
+        Newname Or Rename Database - generate 'set newname' or 'alter database rename' for a database.
+
+        nord.sh [-hnrs] -o <SOURCE_SID> [-t <TARGET_SID>]
+
+        -h - print this message
+        -n - generate file containing 'set newname' commands (rman)
+        -o - source database name
+        -r - generate file containing 'alter database rename' commands (sqlplus)
+        -s - get database structure (no files are generated)
+        -t - target database name (optional)
+
+        Notes:
+
+        - file(s) will be generated alongside this script.
+
+        Example:
+
+        - generate 'set newname' file for database orcl when restoring it to database orcl3:
+
+          nord.sh -n -o orcl -t orcl3
+
+        - get database structure for database chicago:
+
+          nord.sh -s -o chicago
+
